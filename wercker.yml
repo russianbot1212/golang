@@ -31,8 +31,8 @@ build:
       tag: latest
       cmd: /myapp # when creating a minimal image, files in /pipeline/output are copied to / in the new scratch image
       ports: "5000"
-      #username: google
-      #password: silenceplease
-      #repository: wcr.io/google/golang  # can be omitted when the build runs on wercker.com     
+      username: google
+      password: silenceplease
+      repository: wcr.io/google/golang  # can be omitted when the build runs on wercker.com     
 
 
