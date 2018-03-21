@@ -18,7 +18,7 @@ build:
         name: go build
         code: |
           go build -o myapp .
-          echo V erifying build
+          echo Veerifying build
           pwd
           ls -l
     - script:
