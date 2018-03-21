@@ -1,0 +1,38 @@
+dev:
+  box:
+    id: google/golang
+    ports:
+      - "5000"
+  steps:
+    - internal/watch:
+        code: |
+          # If we had any dependencies we would need to re-run glide, dep or whatever
+          echo "Building...."  
+          go build ./...
+          ./source
+        reload: true
+build:
+  box: google/golang
+  steps:
+    - script:
+        name: go build
+        code: |
+          go build -o myapp .
+          echo Verifying build
+          pwd
+          ls -l
+    - script:
+        name: copy binary
+        code: |
+          cp myapp "$WERCKER_OUTPUT_DIR"
+          echo $WERCKER_OUTPUT_DIR
+          ls -l $WERCKER_OUTPUT_DIR
+    - internal/docker-push: 
+      tag: latest
+      cmd: /myapp # when creating a minimal image, files in /pipeline/output are copied to / in the new scratch image
+      ports: "5000"
+      #username: $USERNAME # username. When using CLI, set using "export X_USERNAME=<username>"  
+      #password: $PASSWORD # password. When using CLI, set using "export X_PASSWORD=<password>" 
+      #repository: wcr.io/nigeldeakin/getting-started-golang  # can be omitted when the build runs on wercker.com     
+
+
