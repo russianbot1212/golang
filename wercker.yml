@@ -29,7 +29,7 @@ build:
           ls -l $WERCKER_OUTPUT_DIR
     - internal/docker-scratch-push: 
       tag: latest
-      cmd: /myapp # when creating a minimal image, files in /pipeline/output are copied to / in the new scratch image
+      cmd: /myapp #  when creating a minimal image, files in /pipeline/output are copied to / in the new scratch image
       ports: "5000"
       #username: google
       #password: silenceplease
